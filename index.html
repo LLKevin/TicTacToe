@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Tic Tac Toe</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/main.css">
+</head>
+
+<body>
+  <div class="externalWrapper">
+    <h1 class="title">Tic Tac Toe</h1>
+    <div class="playerSection">
+      <label for="firstPlayer">Player One</label>
+      <input type="text" name="firstPlayer" class="playerOne" placeholder="Player One">
+      <label for="secondPlayer">Player Two</label>
+      <input type="text" name="secondPlayer" class="playerTwo" placeholder="Player Two">
+      <input type="button" name="Start Game" class="btnStartGame" value="Start Game">
+    </div>
+    <div class="gameBoardContainer"></div>
+    <div class="messageBox"></div>
+    <div class="btnGameFlowWrapper">
+      <input type="button" name="ResetGame" class="btnReset" value="New Game">
+      <input type="button" name="nextRound" class="btnNextRound" value="Next Round">
+    </div>
+  </div>
+  <script src="./scripts/script.js" async defer></script>
+</body>
+
+</html>

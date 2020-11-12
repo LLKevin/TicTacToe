@@ -1,0 +1,119 @@
+* {
+
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto',
+    sans-serif;
+  background: linear-gradient(80deg, rgba(231, 153, 140, 1) 16%, rgba(148, 187, 233, 1) 80%);
+}
+
+.title {
+  font-family: 'Dancing Script',
+    cursive;
+  font-weight: 300;
+  line-height: 48px;
+  letter-spacing: 0.2em;
+  padding: 10px;
+  text-align: center;
+}
+
+
+.messageBox {
+  font-size: 20px;
+  padding: 1vh;
+}
+
+.playerSection {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 1vh;
+}
+
+.playerSection input[type="text"] {
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 10px;
+  max-width: 350px;
+}
+
+.playerSection label {
+  align-self: center;
+}
+
+.externalWrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 2em;
+}
+
+.gameBoardContainer {
+  margin: 1em;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  max-width: 100%;
+
+}
+
+.row input {
+  background: #41a3ff;
+  border: none;
+  font-size: 28px;
+  height: 10vh;
+  opacity: 0.7;
+  margin: 1px;
+  width: 10vh;
+}
+
+
+.row input:hover {
+  background-color: #74bcff;
+  cursor: pointer;
+}
+
+.btnGameFlowWrapper {
+  display: flex;
+  margin: 2vh;
+}
+
+
+.btnReset,
+.btnStartGame,
+.btnNextRound {
+  align-self: center;
+  border: 1px solid #41a3ff;
+  border-radius: 5px;
+  color: #00478a;
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 3px;
+  margin-top: 0.8em;
+  margin-left: 0.8em;
+  min-height: 35px;
+  min-width: 80px;
+  max-width: 120px;
+  padding: 10px;
+  transition: ease-in-out 550ms;
+}
+
+.btnReset:hover,
+.btnStartGame:hover,
+.btnNextRound:hover {
+  color: #00478a;
+  background-color: #74bcff;
+}
+
+.btnReset,
+.btnNextRound {
+  display: none;
+}
