@@ -37,6 +37,15 @@ const Gameboard = (() => {
       }
     };
   };
+  const clearGameBoard = () => {
+    for (let i = 0; i < gameBoard.length; i++) {
+      for (let j = 0; j < gameBoard[i].length; j++) {
+        gameBoard[i][j].value = "";
+      }
+    }
+    DisplayUI.clearMessages();
+    GameFlow.resetGameFlow();
+  }
   const resetGame = () => {
     while (gameBoardContainer.firstChild)
       gameBoardContainer.removeChild(gameBoardContainer.firstChild);
@@ -49,6 +58,7 @@ const Gameboard = (() => {
     getGameBoard,
     createBoard,
     resetGame,
+    clearGameBoard,
   };
 })();
 
@@ -84,26 +94,21 @@ const GameFlow = (() => {
       if (board[i][0].value == "X" && board[i][1].value == "X" &&
         board[i][2].value == "X") {
         DisplayUI.displayWinnerMessage(true);
-        gameOver = true;
       }
       if (board[i][0].value == "O" && board[i][1].value == "O" &&
         board[i][2].value == "O") {
         DisplayUI.displayWinnerMessage(false);
-        gameOver = true;
-
       }
 
       //col
       if (board[0][i].value == "X" && board[1][i].value == "X" &&
         board[2][i].value == "X") {
         DisplayUI.displayWinnerMessage(true);
-        gameOver = true;
 
       }
       if (board[0][i].value == "O" && board[1][i].value == "O" &&
         board[2][i].value == "O") {
         DisplayUI.displayWinnerMessage(false);
-        gameOver = true;
       }
     }
 
@@ -111,31 +116,27 @@ const GameFlow = (() => {
     if (board[0][0].value == "X" && board[1][1].value == "X" &&
       board[2][2].value == "X") {
       DisplayUI.displayWinnerMessage(true);
-      gameOver = true;
 
     }
     if (board[0][0].value == "O" && board[1][1].value == "O" &&
       board[2][2].value == "O") {
       DisplayUI.displayWinnerMessage(false);
-      gameOver = true;;
 
     }
     if (board[0][2].value == "X" && board[1][1].value == "X" &&
       board[2][0].value == "X") {
       DisplayUI.displayWinnerMessage(true);
-      gameOver = true;
 
     }
     if (board[0][2].value == "O" && board[1][1].value == "O" &&
       board[2][0].value == "O") {
       DisplayUI.displayWinnerMessage(false);
-      gameOver = true;
 
     }
     //TIE;
     if (numberOfMarks === 9) {
       DisplayUI.displayTieMessage();
-      gameOver = !gameOver;
+      gameOver = true;
     }
   };
 
@@ -157,15 +158,20 @@ const GameFlow = (() => {
 //responsible for any display messages 
 const DisplayUI = (() => {
 
-  //TODO Display who's turn it is;
   let messageBox = document.querySelector(".messageBox");
 
   const displayWinnerMessage = (playerOneWins) => {
     if (playerOneWins === true) {
       messageBox.textContent = `${playerOne.getName()} Wins`;
+      playerOne.incrementPoints();
     } else {
       messageBox.textContent = `${playerTwo.getName()} Wins`;
+      playerTwo.incrementPoints();
     }
+    btnResetGame.style.display = "block"
+    btnNextRound.style.display = "block"
+    gameOver = true;
+
   }
   const displayPlayerTurnMessage = (playerOneTurn) => {
     if (playerOneTurn === "true") {
@@ -207,17 +213,32 @@ const Player = (name, marker) => {
 
 //click handlers
 btnStartGame.addEventListener('click', () => {
-  Gameboard.createBoard(3, 3); //create game board
-  playerOne = Player(document.querySelector('.playerOne').value, 'X');
-  playerTwo = Player(document.querySelector('.playerTwo').value, 'O');
-  DisplayUI.displayPlayerTurnMessage("true");
-  btnResetGame.style.display = "block";
-  btnNextRound.style.display = "block";
-  btnStartGame.style.display = "none";
+
+  let firstName = document.querySelector('.playerOne');
+  let secondName = document.querySelector('.playerTwo');
+
+  if (firstName.value !== "" && secondName.value !== "") {
+    Gameboard.createBoard(3, 3); //create game board
+    playerOne = Player(firstName.value, 'X');
+    playerTwo = Player(secondName.value, 'O');
+    DisplayUI.displayPlayerTurnMessage("true");
+    btnStartGame.style.display = "none";
+  } else {
+    alert("You must enter player names to Play"); //TODO add ui element to
+  }
 });
 btnResetGame.addEventListener('click', () => {
   Gameboard.resetGame();
   btnResetGame.style.display = "none";
   btnNextRound.style.display = "none";
   btnStartGame.style.display = "block";
+});
+btnNextRound.addEventListener('click', () => {
+  Gameboard.clearGameBoard();
+  DisplayUI.displayPlayerTurnMessage("true");
+
+  btnResetGame.style.display = "none"
+  btnNextRound.style.display = "none"
+  console.log(playerOne.getPoints());
+  console.log(playerTwo.getPoints());
 });
